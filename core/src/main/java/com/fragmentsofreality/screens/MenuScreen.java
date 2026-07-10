@@ -21,8 +21,7 @@ public class MenuScreen extends ScreenAdapter {
     public MenuScreen(PiecesOfAMan game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
-        this.skin = new Skin(Gdx.files.internal("assets/ui/uiskin.json"));
-
+	this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         setupUI();
     }
 
@@ -30,7 +29,7 @@ public class MenuScreen extends ScreenAdapter {
         Table rootTable = new Table();
         rootTable.setFillParent(true);
 
-        Label titleLabel = new Label("Pieces of a Man", skin, "title");
+        Label titleLabel = new Label("Pieces of a Man", skin);
         titleLabel.setAlignment(Align.center);
 
         Label promptLabel = new Label("Press SPACE to Awaken", skin);

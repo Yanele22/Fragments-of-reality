@@ -12,7 +12,7 @@ public class DialogueBox extends Table {
         super(skin);
         this.skin = skin;
 
-        this.setBackground("default-pane");
+        //this.setBackground("default-window");
 
         textLabel = new TypeWriterLabel("", skin);
         textLabel.setAlignment(Align.topLeft);
