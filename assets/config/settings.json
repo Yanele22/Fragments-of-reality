@@ -1,0 +1,7 @@
+{
+  "startingHealth": 100,
+  "phantomDamage": 20,
+  "memoryPerRoom": 20,
+  "totalRooms": 5,
+  "riddlesPerRoom": 5
+}

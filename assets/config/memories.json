@@ -1,0 +1,26 @@
+{
+  "room1": {
+    "title": "Childhood",
+    "story": "As you enter the room, the sound of distant laughter echoes around you. You remember running through green fields, playing without fear, and feeling safe. This fragment reminds you that happiness once filled your life."
+  },
+
+  "room2": {
+    "title": "Friendship",
+    "story": "A familiar voice calls your name. Faces begin to appear from the darkness. You remember the people who stood beside you when life became difficult. Trust was once your greatest strength."
+  },
+
+  "room3": {
+    "title": "Loss",
+    "story": "The room feels cold and silent. Memories return of someone walking away forever. Pain fills your heart, reminding you that loss shaped who you became."
+  },
+
+  "room4": {
+    "title": "Hope",
+    "story": "Light breaks through the darkness. You remember refusing to give up, even when everything seemed impossible. Hope carried you forward when nothing else remained."
+  },
+
+  "room5": {
+    "title": "Truth",
+    "story": "All the fragments come together. You finally remember who you are and why your memories were shattered. Reality has been restored, and your journey is complete."
+  }
+}

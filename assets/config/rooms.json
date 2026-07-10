@@ -1,0 +1,29 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Childhood",
+      "reward": 20
+    },
+    {
+      "id": 2,
+      "name": "Friendship",
+      "reward": 20
+    },
+    {
+      "id": 3,
+      "name": "Loss",
+      "reward": 20
+    },
+    {
+      "id": 4,
+      "name": "Hope",
+      "reward": 20
+    },
+    {
+      "id": 5,
+      "name": "Truth",
+      "reward": 20
+    }
+  ]
+}

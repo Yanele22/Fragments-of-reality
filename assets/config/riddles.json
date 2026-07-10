@@ -1,0 +1,242 @@
+
+{
+  "room1": [
+    {
+      "question": "I have hands but cannot clap.",
+      "choices": [
+        "Clock",
+        "Tree",
+        "Book"
+      ],
+      "answer": 0
+    },
+
+    {
+      "question": "I have keys but no locks.",
+      "choices": [
+        "Piano",
+        "House",
+        "Door"
+      ],
+      "answer": 0
+    },
+
+    {
+      "question": "What gets wetter the more it dries?",
+      "choices": [
+        "Towel",
+        "Rain",
+        "Cloud"
+      ],
+      "answer": 0
+    },
+
+    {
+      "question": "The more you take away, the bigger I become.",
+      "choices": [
+        "Hole",
+        "River",
+        "Mountain"
+      ],
+      "answer": 0
+    },
+
+    {
+      "question": "What has one eye but cannot see?",
+      "choices": [
+        "Needle",
+        "Cyclops",
+        "Storm"
+      ],
+      "answer": 0
+    }
+  ],
+  "room2": [
+{
+"question": "What has a heart that doesn't beat?",
+"choices": [
+"Artichoke",
+"Human",
+"Robot"
+],
+"answer": 0
+},
+{
+"question": "What can travel around the world while staying in one corner?",
+"choices": [
+"Stamp",
+"Bird",
+"Plane"
+],
+"answer": 0
+},
+{
+"question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
+"choices": [
+"The letter M",
+"Time",
+"Clock"
+],
+"answer": 0
+},
+{
+"question": "What has many teeth but cannot bite?",
+"choices": [
+"Comb",
+"Dog",
+"Lion"
+],
+"answer": 0
+},
+{
+"question": "What begins with T, ends with T, and has T inside?",
+"choices": [
+"Teapot",
+"Tent",
+"Ticket"
+],
+"answer": 0
+}
+],
+  "room3": [
+        {
+          "question": "What can you catch but never throw?",
+          "choices": [
+            "Cold",
+            "Ball",
+            "Stick"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What goes up but never comes down?",
+          "choices": [
+            "Age",
+            "Rocket",
+            "Smoke"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What has a neck but no head?",
+          "choices": [
+            "Bottle",
+            "Chicken",
+            "Tree"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What has four wheels and flies?",
+          "choices": [
+            "Garbage Truck",
+            "Race Car",
+            "Bus"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What can fill a room but takes up no space?",
+          "choices": [
+            "Light",
+            "Chair",
+            "Smoke"
+          ],
+          "answer": 0
+        }
+        ],
+  "room4": [
+    {
+      "question": "What has an eye but cannot see?",
+      "choices": [
+        "Hurricane",
+        "Person",
+        "Camera"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "What runs but never walks?",
+      "choices": [
+        "River",
+        "Dog",
+        "Car"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "What gets bigger the more you remove from it?",
+      "choices": [
+        "Hole",
+        "Rock",
+        "Bucket"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "What has words but never speaks?",
+      "choices": [
+        "Book",
+        "Teacher",
+        "Phone"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "What is full of holes but still holds water?",
+      "choices": [
+        "Sponge",
+        "Basket",
+        "Paper"
+      ],
+      "answer": 0
+    }
+      ],
+  "room5": [
+        {
+          "question": "What building has the most stories?",
+          "choices": [
+            "Library",
+            "Hospital",
+            "School"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What has one head, one foot, and four legs?",
+          "choices": [
+            "Bed",
+            "Person",
+            "Horse"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What can you break without touching it?",
+          "choices": [
+            "Promise",
+            "Glass",
+            "Bottle"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "What is always in front of you but can't be seen?",
+          "choices": [
+            "Future",
+            "Shadow",
+            "Mirror"
+          ],
+          "answer": 0
+        },
+        {
+          "question": "The more of me there is, the less you see. What am I?",
+          "choices": [
+            "Darkness",
+            "Water",
+            "Glass"
+          ],
+          "answer": 0
+        }
+          ]
+}
