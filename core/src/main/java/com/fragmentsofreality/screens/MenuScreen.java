@@ -90,10 +90,9 @@ public class MenuScreen extends ScreenAdapter {
                 // Clear out the old line and animate the new one smoothly
                 testDialogue.showDialogue(dialogueLines[currentLineIndex]);
             } else {
-                // Dialogue loop is finished! 
-                // For now, we reset back to index 0. (Later, this transitions to your game world)
-                currentLineIndex = 0;
-                testDialogue.showDialogue(dialogueLines[currentLineIndex]);
+
+			game.setScreen(new GameScreen(game));
+            		dispose();
             }
         }
     }
