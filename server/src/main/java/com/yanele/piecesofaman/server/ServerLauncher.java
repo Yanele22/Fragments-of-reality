@@ -4,5 +4,6 @@ package com.yanele.piecesofaman.server;
 public class ServerLauncher {
     public static void main(String[] args) {
         // TODO Implement server application.
+        System.out.println("Starting server...");
     }
 }
