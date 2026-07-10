@@ -23,15 +23,15 @@ public class Main extends ApplicationAdapter {
         stage = new Stage(new FitViewport(640, 480));
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
 
-        Window window = new Window("Example screen", skin, "border");
+        Window window = new Window("FRAGMENTS OF SELF", skin , "border");
         window.defaults().pad(4f);
-        window.add("This is a simple Scene2D view.").row();
-        final TextButton button = new TextButton("Click me!", skin);
+        window.add("Welcome").row();
+        final TextButton button = new TextButton("Start", skin);
         button.pad(8f);
         button.addListener(new ChangeListener() {
             @Override
             public void changed(final ChangeEvent event, final Actor actor) {
-                button.setText("Clicked.");
+                button.setText("Launched");
             }
         });
         window.add(button);
