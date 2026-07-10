@@ -1,6 +1,7 @@
 package com.fragmentsofreality.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,15 +18,27 @@ public class MenuScreen extends ScreenAdapter {
     private Stage stage;
     private Skin skin;
     private DialogueBox testDialogue;
+    
+    // Narrative sequence tracking
+    private String[] dialogueLines;
+    private int currentLineIndex = 0;
 
     public MenuScreen(PiecesOfAMan game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
-	this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+
+        // Sequence of story beats
+        this.dialogueLines = new String[] {
+            "This is a test of the typewriter effect. Focus your intentional attention here. The Phantoms are waiting...",
+            "Fragments of memory scatter across the deep void. Who were you before the fracture?",
+            "To find yourself, you must piece together the remnants of a man long forgotten."
+        };
+
         setupUI();
     }
 
-    private void setupUI() {
+        private void setupUI() {
         Table rootTable = new Table();
         rootTable.setFillParent(true);
 
@@ -47,7 +60,8 @@ public class MenuScreen extends ScreenAdapter {
 
         stage.addActor(testDialogue);
 
-        testDialogue.showDialogue("This is a test of the typewriter effect. Focus your intentional attention here. The Phantoms are waiting...");
+        // Feed the typewriter its first story line on startup
+        testDialogue.showDialogue(dialogueLines[currentLineIndex]);
     }
 
     @Override
@@ -60,8 +74,28 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Constantly poll for player interaction frame-by-frame
+        handleInput();
+
         stage.act(delta);
         stage.draw();
+    }
+
+    private void handleInput() {
+        // Triggers exactly once the moment SPACE is tapped down
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            currentLineIndex++;
+            
+            if (currentLineIndex < dialogueLines.length) {
+                // Clear out the old line and animate the new one smoothly
+                testDialogue.showDialogue(dialogueLines[currentLineIndex]);
+            } else {
+                // Dialogue loop is finished! 
+                // For now, we reset back to index 0. (Later, this transitions to your game world)
+                currentLineIndex = 0;
+                testDialogue.showDialogue(dialogueLines[currentLineIndex]);
+            }
+        }
     }
 
     @Override
