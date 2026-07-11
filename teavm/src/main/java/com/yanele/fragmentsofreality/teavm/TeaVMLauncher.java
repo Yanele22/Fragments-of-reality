@@ -3,7 +3,7 @@ package com.yanele.fragmentsofreality.teavm;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.yanele.fragmentsofreality.Main;
-
+import com.fragmentsofreality.PiecesOfAMan;
 /**
  * Launches the TeaVM/HTML application.
  */
@@ -14,6 +14,5 @@ public class TeaVMLauncher {
         config.width = 640;
         config.height = 480;
         //// If width and height are both 0, then the app will use all available space.
-        new WebApplication(new Main(), config);
-    }
+        new WebApplication(new PiecesOfAMan(), config);    }
 }
