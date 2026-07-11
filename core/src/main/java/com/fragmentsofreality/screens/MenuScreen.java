@@ -1,18 +1,21 @@
 package com.fragmentsofreality.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fragmentsofreality.PiecesOfAMan;
-import com.fragmentsofreality.audio.AudioManager;
+import com.fragmentsofreality.ui.MainMenuUI;
 
-public class MenuScreen implements Screen {
+public class MenuScreen extends ScreenAdapter {
     private final PiecesOfAMan game;
-    private SpriteBatch batch;
-    private BitmapFont font;
+    private Stage stage;
+    private Skin skin;
+    private MainMenuUI menuUI;
 
     public MenuScreen(PiecesOfAMan game) {
         this.game = game;
@@ -20,44 +23,44 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        // Uses libGDX's internal default font so we don't crash over missing asset paths
-        font = new BitmapFont(); 
+        stage = new Stage(new ScreenViewport());
+        skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        menuUI = new MainMenuUI(stage, skin);
+
+        Gdx.input.setInputProcessor(stage);
+
+        menuUI.startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new PlayScreen(game));
+            }
+        });
+
+        menuUI.exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
     }
 
     @Override
     public void render(float delta) {
-        // 1. Clear the viewport to a deep black environment
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // 2. Draw your title layouts on screen
-        batch.begin();
-        font.draw(batch, "Pieces of a Man", 260, 300);
-        font.draw(batch, "Press SPACE to Awaken", 230, 200);
-        font.draw(batch, "The Phantoms are waiting...", 220, 100);
-        batch.end();
-
-        // 3. Monitor input to advance states safely
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            // Trigger your background engine track to loop
-            //AudioManager.getInstance().playAmbientWind();
-            
-            // Swap screens into your active grid canvas space
-            game.setScreen(new PlayScreen(game));
-        }
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
-    public void resize(int width, int height) {}
-
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+    }
 
     @Override
     public void dispose() {
-        if (batch != null) batch.dispose();
-        if (font != null) font.dispose();
+        if (stage != null) stage.dispose();
+        if (skin != null) skin.dispose();
     }
 }
