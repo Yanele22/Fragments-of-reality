@@ -59,7 +59,7 @@ public class PlayScreen implements Screen {
 
         debugRenderer.setColor(1, 1, 1, 1);
         debugRenderer.rect(player.position.x, player.position.y, player.bounds.width, player.bounds.height);
-
+        
         debugRenderer.end();
     }
 
