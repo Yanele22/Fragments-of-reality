@@ -2,18 +2,16 @@ package com.fragmentsofreality.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import java.util.Random;
 
 public class DialogueManager {
-    private final Json json;
     private JsonValue riddles;
     private JsonValue memories;
     private final Random random;
 
     public DialogueManager() {
-        json = new Json();
         random = new Random();
         loadFiles();
     }
@@ -21,8 +19,10 @@ public class DialogueManager {
     private void loadFiles() {
         FileHandle riddlesFile = Gdx.files.internal("config/riddles.json");
         FileHandle memoriesFile = Gdx.files.internal("config/memories.json");
-        riddles = json.fromJson(JsonValue.class, riddlesFile);
-        memories = json.fromJson(JsonValue.class, memoriesFile);
+
+        JsonReader reader = new JsonReader();
+        riddles = reader.parse(riddlesFile);
+        memories = reader.parse(memoriesFile);
     }
 
     public JsonValue getRandomRiddle(int room) {
