@@ -14,9 +14,7 @@ public class Player {
     }
 
     public void update(float delta, float dirX, float dirY) {
-        // Move position based on input vectors
         position.add(dirX * speed * delta, dirY * speed * delta);
-        // Sync collision box to new position
         bounds.setPosition(position.x, position.y);
     }
 }
