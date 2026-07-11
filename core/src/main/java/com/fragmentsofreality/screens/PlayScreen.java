@@ -8,17 +8,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.fragmentsofreality.PiecesOfAMan;
+import com.fragmentsofreality.entities.Player;
 
 public class PlayScreen implements Screen {
     private final PiecesOfAMan game;
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private ShapeRenderer debugRenderer;
-
-    // Player placeholder grid positions
-    private float playerX = 400;
-    private float playerY = 300;
-    private float moveSpeed = 200f; // Pixels per second
+    private Player player;
 
     public PlayScreen(PiecesOfAMan game) {
         this.game = game;
@@ -27,9 +24,10 @@ public class PlayScreen implements Screen {
     @Override
     public void show() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 600); // Standard layout size
+        camera.setToOrtho(false, 800, 600);
         batch = new SpriteBatch();
-        debugRenderer = new ShapeRenderer(); // ShapeRenderer used for rapid debugging
+        debugRenderer = new ShapeRenderer();
+        player = new Player(400, 300);
     }
 
     @Override
@@ -37,31 +35,31 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.15f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Player input polling
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) playerY += moveSpeed * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) playerY -= moveSpeed * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) playerX -= moveSpeed * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) playerX += moveSpeed * delta;
+        float dirX = 0;
+        float dirY = 0;
 
-        // Camera follow locking
-        camera.position.set(playerX, playerY, 0);
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) dirY = 1;
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) dirY = -1;
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) dirX = -1;
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) dirX = 1;
+
+        player.update(delta, dirX, dirY);
+
+        camera.position.set(player.position.x + 16, player.position.y + 16, 0);
         camera.update();
 
         debugRenderer.setProjectionMatrix(camera.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        // --- DRAW BACKGROUND TILES FOR REFERENCE ---
-        // This paints a collection of colored static blocks at fixed map coordinates
-        debugRenderer.setColor(0.3f, 0.3f, 0.5f, 1f); // Blueish blocks
+        debugRenderer.setColor(0.3f, 0.3f, 0.5f, 1f);
         debugRenderer.rect(200, 200, 32, 32);
         debugRenderer.rect(600, 400, 32, 32);
         debugRenderer.rect(400, 100, 32, 32);
         debugRenderer.rect(100, 500, 32, 32);
 
-        // --- DRAW PLAYER CUBE ---
-        debugRenderer.setColor(1, 1, 1, 1); // White block
-        debugRenderer.rect(playerX - 16, playerY - 16, 32, 32);
-        
+        debugRenderer.setColor(1, 1, 1, 1);
+        debugRenderer.rect(player.position.x, player.position.y, player.bounds.width, player.bounds.height);
+
         debugRenderer.end();
     }
 
