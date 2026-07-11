@@ -2,112 +2,62 @@ package com.fragmentsofreality.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fragmentsofreality.PiecesOfAMan;
-import com.fragmentsofreality.ui.DialogueBox;
+import com.fragmentsofreality.audio.AudioManager;
 
-public class MenuScreen extends ScreenAdapter {
+public class MenuScreen implements Screen {
     private final PiecesOfAMan game;
-    private Stage stage;
-    private Skin skin;
-    private DialogueBox testDialogue;
-    
-    // Narrative sequence tracking
-    private String[] dialogueLines;
-    private int currentLineIndex = 0;
+    private SpriteBatch batch;
+    private BitmapFont font;
 
     public MenuScreen(PiecesOfAMan game) {
         this.game = game;
-        this.stage = new Stage(new ScreenViewport());
-        this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-
-        // Sequence of story beats
-        this.dialogueLines = new String[] {
-            "This is a test of the typewriter effect. Focus your intentional attention here. The Phantoms are waiting...",
-            "Fragments of memory scatter across the deep void. Who were you before the fracture?",
-            "To find yourself, you must piece together the remnants of a man long forgotten."
-        };
-
-        setupUI();
-    }
-
-        private void setupUI() {
-        Table rootTable = new Table();
-        rootTable.setFillParent(true);
-
-        Label titleLabel = new Label("Pieces of a Man", skin);
-        titleLabel.setAlignment(Align.center);
-
-        Label promptLabel = new Label("Press SPACE to Awaken", skin);
-        promptLabel.setAlignment(Align.center);
-
-        rootTable.add(titleLabel).expandX().padBottom(50f).row();
-        rootTable.add(promptLabel).expandX();
-
-        stage.addActor(rootTable);
-
-        testDialogue = new DialogueBox(skin);
-        testDialogue.setWidth(Gdx.graphics.getWidth());
-        testDialogue.setHeight(150f);
-        testDialogue.setPosition(0, 0);
-
-        stage.addActor(testDialogue);
-
-        // Feed the typewriter its first story line on startup
-        testDialogue.showDialogue(dialogueLines[currentLineIndex]);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        batch = new SpriteBatch();
+        // Uses libGDX's internal default font so we don't crash over missing asset paths
+        font = new BitmapFont(); 
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
+        // 1. Clear the viewport to a deep black environment
+        Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Constantly poll for player interaction frame-by-frame
-        handleInput();
+        // 2. Draw your title layouts on screen
+        batch.begin();
+        font.draw(batch, "Pieces of a Man", 260, 300);
+        font.draw(batch, "Press SPACE to Awaken", 230, 200);
+        font.draw(batch, "The Phantoms are waiting...", 220, 100);
+        batch.end();
 
-        stage.act(delta);
-        stage.draw();
-    }
-
-    private void handleInput() {
-        // Triggers exactly once the moment SPACE is tapped down
+        // 3. Monitor input to advance states safely
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            currentLineIndex++;
+            // Trigger your background engine track to loop
+            //AudioManager.getInstance().playAmbientWind();
             
-            if (currentLineIndex < dialogueLines.length) {
-                // Clear out the old line and animate the new one smoothly
-                testDialogue.showDialogue(dialogueLines[currentLineIndex]);
-            } else {
-
-			game.setScreen(new GameScreen(game));
-            		dispose();
-            }
+            // Swap screens into your active grid canvas space
+            game.setScreen(new PlayScreen(game));
         }
     }
 
     @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-        if (testDialogue != null) {
-            testDialogue.setWidth(width);
-        }
-    }
+    public void resize(int width, int height) {}
+
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
 
     @Override
     public void dispose() {
-        stage.dispose();
-        skin.dispose();
+        if (batch != null) batch.dispose();
+        if (font != null) font.dispose();
     }
 }
